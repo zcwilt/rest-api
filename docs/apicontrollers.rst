@@ -1,0 +1,65 @@
+API Controllers
+===============
+
+
+Routes
+------
+
+Zcwilt\Api uses resource controllers. To define your routes for each controller you want you will need to add the following to your api routes file.
+
+::
+
+    Route::resource('modelName', 'controller');
+
+``modelKey`` is the model name you want to have api access.
+
+
+``Controller`` is the name of your controller class.
+
+As an example. To use the dummy simple controller supplied by the project, your routing entries would be.
+
+::
+
+    Route::resource('dummySimple', 'Api\DummySimpleController');
+
+or to use the default User model that comes with Laravel
+
+::
+
+    Route::resource('user', 'Api\UserController');
+
+
+For each Laravel Model that you want to use in the API, you will need to create a Controller
+
+Controller Definition
+---------------------
+
+As mentioned above, for each Laravel model that you want to provide API access to you will need to create a Controller.
+
+This should be placed in the standard laravel location
+e.g. App/Http/Controllers or a sub directory. Our suggestion is to use App/Http/Controllers/Api
+
+The controller definition is fairly simple
+
+.. code-block:: php
+
+    <?php
+    namespace App\Http\Controllers\Api;
+
+    use Zcwilt\Api\Controllers\ApiController;
+
+    class DummySimpleController extends ApiController
+    {
+        protected $modelName = '\\Zcwilt\Api\\Models\\DummySimple';
+    }
+
+.. note:: The ``protected $modelName`` defines the Eloquent Model that will be used by the controller. The factory class used will try and resolve the model
+    from either your projects App folder or from the App/Models folder, If the Model is in one of these folders there is no need to namespace the model name. e.g. you could just do
+    ::
+
+        protected $modelName = 'ModelName';
+
+Authorization
+-------------
+
+@todo
