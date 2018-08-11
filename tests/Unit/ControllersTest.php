@@ -100,7 +100,7 @@ class ControllersTest extends TestCase
         $response = json_decode($response->getContent());
         $this->assertTrue($response->error->status_code === 400);
         $message = $response->error->message;
-        $this->assertContains('Integrity constraint violation', $message);
+        $this->assertContains('SQLSTATE', $message);
         $request = Request::create('/index', 'POST', [
         ]);
         $response = $controller->store($request);
