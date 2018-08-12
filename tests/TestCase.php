@@ -72,15 +72,15 @@ abstract class TestCase extends Orchestra
 
         ZcwiltPost::create( [
             'user_id' => $user1->id,
-            'comment' => 'foo'
+            'comment' => '1foo'
         ] );
         ZcwiltPost::create( [
-            'user_id' => $user2->id,
-            'comment' => 'bar'
+            'user_id' => $user1->id,
+            'comment' => '1bar'
         ] );
         ZcwiltPost::create( [
-            'user_id' => $user3->id,
-            'comment' => 'bin'
+            'user_id' => $user1->id,
+            'comment' => '1bin'
         ] );
 
         ZcwiltDummy::create( [
