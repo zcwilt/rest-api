@@ -15,4 +15,8 @@ class ZcwiltUser extends Model
         ];
     }
 
+    public function posts()
+    {
+        return $this->hasMany('Tests\Fixtures\Models\ZcwiltPost', 'user_id');
+    }
 }
