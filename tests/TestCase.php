@@ -54,46 +54,45 @@ abstract class TestCase extends Orchestra
 
     public function seedTables()
     {
-        $user1 = ZcwiltUser::create( [
+        $user1 = ZcwiltUser::create([
             'name' => 'name1',
             'email' => 'test1@gmail.com',
             'age' => 15,
-        ] );
-        $user2 = ZcwiltUser::create( [
+        ]);
+        $user2 = ZcwiltUser::create([
             'name' => 'name2',
             'email' => 'test2@gmail.com',
             'age' => 30,
-        ] );
-        $user3 = ZcwiltUser::create( [
+        ]);
+        $user3 = ZcwiltUser::create([
             'name' => 'othername',
             'email' => 'foo@gmail.com',
             'age' => 5,
-        ] );
+        ]);
 
-        ZcwiltPost::create( [
+        ZcwiltPost::create([
             'user_id' => $user1->id,
             'comment' => 'foo'
-        ] );
-        ZcwiltPost::create( [
+        ]);
+        ZcwiltPost::create([
             'user_id' => $user2->id,
             'comment' => 'bar'
-        ] );
-        ZcwiltPost::create( [
+        ]);
+        ZcwiltPost::create([
             'user_id' => $user3->id,
             'comment' => 'bin'
-        ] );
+        ]);
 
-        ZcwiltDummy::create( [
+        ZcwiltDummy::create([
             'name' => 'name1',
             'email' => 'test1@gmail.com',
             'age' => 15,
-        ] );
-        ZcwiltDummy1::create( [
+        ]);
+        ZcwiltDummy1::create([
             'name' => 'name1',
             'email' => 'test1@gmail.com',
             'age' => 15,
-        ] );
-
+        ]);
     }
 
     public function getRequestResults()
@@ -104,6 +103,5 @@ abstract class TestCase extends Orchestra
         $query = $api->buildQuery(new ZcwiltUser);
         $result = $query->get()->toArray();
         return $result;
-
     }
 }

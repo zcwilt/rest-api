@@ -4,7 +4,7 @@ namespace Zcwilt\Api\Parsers;
 
 use Illuminate\Database\Eloquent\Builder;
 
-Interface ParserInterface
+interface ParserInterface
 {
     public function tokenizeParameters(string $parameters);
     public function prepareQuery(Builder $eloquentBuilder);

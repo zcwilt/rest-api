@@ -14,5 +14,4 @@ class ZcwiltUser extends Model
             'name' => 'required'
         ];
     }
-
 }

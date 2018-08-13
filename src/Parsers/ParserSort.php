@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ParserSort extends ParserAbstract
 {
-
     public function tokenizeParameters(string $parameters)
     {
         if (trim($parameters) === '') {

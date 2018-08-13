@@ -8,7 +8,6 @@ use Tests\TestCase;
 
 class GetParserTest extends TestCase
 {
-
     public function testFailParserFactory()
     {
         $parserFactory = new ParserFactory();
@@ -22,5 +21,4 @@ class GetParserTest extends TestCase
         $result = $parserFactory->getParser('sort');
         $this->assertTrue(count($result->getTokenized()) === 0);
     }
-
 }

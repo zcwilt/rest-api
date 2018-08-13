@@ -4,7 +4,7 @@ namespace Zcwilt\Api\Parsers;
 
 use Illuminate\Database\Eloquent\Builder;
 
-Abstract class ParserAbstract implements ParserInterface
+abstract class ParserAbstract implements ParserInterface
 {
     /**
      * @var array
@@ -30,5 +30,4 @@ Abstract class ParserAbstract implements ParserInterface
     {
         return $this->tokenized;
     }
-
 }
