@@ -77,5 +77,4 @@ class ParserIncludeParseTest extends TestCase
         $message = $response->error->message;
         $this->assertContains('Call to undefined relationship', $message);
     }
-
 }

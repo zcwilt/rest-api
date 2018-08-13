@@ -4,7 +4,7 @@ namespace Zcwilt\Api\Controllers;
 
 use Illuminate\Support\Facades\Response;
 
-class AbstractApiController Extends Controller
+class AbstractApiController extends Controller
 {
     protected $statusCode = 200;
 

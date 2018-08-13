@@ -4,7 +4,7 @@ namespace Zcwilt\Api\Parsers;
 
 use Zcwilt\Api\Exceptions\InvalidParserException;
 
-Abstract class ParserWhereBetweenAbstract extends ParserAbstract
+abstract class ParserWhereBetweenAbstract extends ParserAbstract
 {
     public function tokenizeParameters(string $parameters)
     {

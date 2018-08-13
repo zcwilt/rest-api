@@ -86,7 +86,6 @@ class ControllersTest extends TestCase
         $response = $controller->destroy(99);
         $response = json_decode($response->getContent());
         $this->assertTrue($response->error->message === 'item does not exist');
-
     }
 
     public function testControllerStoreFails()

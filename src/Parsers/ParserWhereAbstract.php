@@ -4,7 +4,7 @@ namespace Zcwilt\Api\Parsers;
 
 use Zcwilt\Api\Exceptions\InvalidParserException;
 
-Abstract class ParserWhereAbstract extends ParserAbstract
+abstract class ParserWhereAbstract extends ParserAbstract
 {
     /**
      * @var array
@@ -24,7 +24,5 @@ Abstract class ParserWhereAbstract extends ParserAbstract
             throw new InvalidParserException("where parser - invalid parameters");
         }
         $this->tokenized = $parameters;
-
     }
-
 }

@@ -13,5 +13,4 @@ class ParserOrWhere extends ParserWhereAbstract
         $eloquentBuilder = $eloquentBuilder->orWhere($tokenized[0], $realOperator, $tokenized[2]);
         return $eloquentBuilder;
     }
-
 }

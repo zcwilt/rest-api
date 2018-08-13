@@ -9,7 +9,6 @@ use Zcwilt\Api\Exceptions\InvalidParserException;
 
 class BuildParsersTest extends TestCase
 {
-
     public function testFailInvalidParser()
     {
         $api = new ApiQueryParser(new ParserFactory());
@@ -29,5 +28,4 @@ class BuildParsersTest extends TestCase
         $this->assertTrue($tokenized['field'] === 'foo');
         $this->assertTrue($tokenized['direction'] === 'ASC');
     }
-
 }

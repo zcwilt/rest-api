@@ -6,5 +6,4 @@ use \Illuminate\Database\Eloquent\Model;
 class ZcwiltPost extends Model
 {
     protected $fillable = ['user_id', 'comment'];
-
 }

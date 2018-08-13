@@ -7,7 +7,6 @@ class ModelMakerFactory
 {
     public function make(string $className)
     {
-
         $namespacePrefix = "";
         if (app()->runningUnitTests()) {
             $namespacePrefix = "\\Tests\\Fixtures";
