@@ -8,7 +8,6 @@ use Tests\TestCase;
 
 class ParseRequestTest extends TestCase
 {
-
     public function testSimple()
     {
         $api = new ApiQueryParser(new ParserFactory());
@@ -23,5 +22,4 @@ class ParseRequestTest extends TestCase
         $this->assertTrue($parsedKeys['where'] === 'foo');
         $this->assertTrue($parsedKeys['sort'] === 'bar');
     }
-
 }

@@ -81,7 +81,6 @@ class ApiController extends AbstractApiController
         return $this->respond([
             'data' => $result->toArray()
         ]);
-
     }
 
     public function destroy($id): jsonResponse

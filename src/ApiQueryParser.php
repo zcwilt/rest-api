@@ -103,5 +103,4 @@ class ApiQueryParser
         }
         return $eloquentQB;
     }
-
 }
