@@ -10,6 +10,8 @@ Zcwilt\Api uses resource controllers. To define your routes for each controller 
 ::
 
     Route::resource('modelName', 'controller');
+    Route::delete('modelName', 'controller@destroyByQuery');
+
 
 ``modelName`` is the model name you want to have api access.
 
@@ -21,6 +23,8 @@ As an example. To use the dummy simple controller supplied by the project, your 
 ::
 
     Route::resource('dummySimple', 'Api\DummySimpleController');
+    Route::delete('dummySimple', 'Api\DummySimpleController@destroyByQuery');
+
 
 or to use the default User model that comes with Laravel
 
