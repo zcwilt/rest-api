@@ -94,35 +94,23 @@ class ApiController extends AbstractApiController
             'data' => $result
         ]);
     }
-//
-//    protected function destroyByQuery(Request $request)
-//    {
-//        try {
-//            $this->queryBuilder->parseRequest($request);
-//        } catch (\Exception $e) {
-//            return $this->setStatusCode(400)->respondWithError($e->getMessage());
-//        }
-//        try {
-//            $model = $this->queryBuilder->buildCollectionQuery($this->model);
-//            $model = $model->get();
-//
-//            if (count($model) == 0) {
-//                return $this->setStatusCode(400)->respondWithError('No matching items');
-//            }
-//
-//            // note: we use each() here to iterate the deletions, so the Delete event fires on each
-//            $model->each(function ($record) {
-//                $record->delete();
-//            });
-//
-//        } catch (\Exception $e) {
-//            return $this->setStatusCode(400)->respondWithError($e->getMessage());
-//        }
-//        return $this->respond([
-//            'data' => ''
-//        ]);
-//    }
-//
+
+    public function destroyByQuery(Request $request): jsonResponse
+    {
+        try {
+            $parser = new ApiQueryParser(new ParserFactory());
+            $query = $parser->parseRequest($request)->buildparsers()->buildQuery($this->model);
+        } catch (\Exception $e) {
+            return $this->setStatusCode(400)->respondWithError($e->getMessage());
+        }
+        $result=$query->get();
+        $query->each(function ($record) {
+            $record->delete();
+        });
+        return $this->respond([
+            'data' => $result->toArray()
+        ]);
+    }
 
     protected function loadRules($id = 0)
     {

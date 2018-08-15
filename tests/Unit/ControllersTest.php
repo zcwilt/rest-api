@@ -153,25 +153,22 @@ class ControllersTest extends TestCase
         $this->assertTrue($response->data->name === 'Dirk Gently');
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public function testControllerDeleteByQuery()
+    {
+        $controller = new ZcwiltUserController(new ModelMakerFactory());
+        $request = Request::create('/deleteByQuery', 'DELETE', [
+            'where' => 'id:eq:2'
+        ]);
+        $response = $controller->destroyByQuery($request);
+        $response = json_decode($response->getContent());
+        $this->assertTrue($response->data[0]->id === 2);
+        $request = Request::create('/deleteByQuery', 'DELETE', [
+            'where' => 'id:eq:9'
+        ]);
+        $response = $controller->destroyByQuery($request);
+        $response = json_decode($response->getContent());
+        $this->assertTrue(count($response->data) === 0);
+    }
 
     public function testControllerAppNamespace()
     {

@@ -35,7 +35,7 @@ class ApiQueryParser
     public function parseRequest(Request $request): ApiQueryParser
     {
         $this->parsedKeys = [];
-        if (count($request->query())) {
+        if (count($this->getQueryParams($request))) {
             $this->gatherKeys($request);
         }
         return $this;
@@ -74,7 +74,7 @@ class ApiQueryParser
 
     protected function gatherKeys(Request $request)
     {
-        foreach ($request->query() as $key => $value) {
+        foreach ($this->getQueryParams($request) as $key => $value) {
             if ($key == 'page' || $key == 'limit') {
                 continue;
             }
@@ -102,5 +102,12 @@ class ApiQueryParser
             $eloquentQB = $parser->addQuery($eloquentQB);
         }
         return $eloquentQB;
+    }
+
+    protected function getQueryParams(Request $request)
+    {
+        $params = $request->query();
+        $params = array_merge($params, $request->all());
+        return $params;
     }
 }
