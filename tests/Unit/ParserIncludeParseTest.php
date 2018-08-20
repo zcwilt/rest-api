@@ -10,6 +10,7 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\Request;
 use Tests\Fixtures\Controllers\Api\ZcwiltUserController;
 use Zcwilt\Api\ModelMakerFactory;
+use Tests\Fixtures\Models\ZcwiltUser;
 
 class ParserIncludeParseTest extends TestCase
 {
@@ -19,6 +20,7 @@ class ParserIncludeParseTest extends TestCase
         $this->createTables();
         $this->seedTables();
     }
+
     public function testIncludesParserParseTestNoParams()
     {
         $parserFactory = new ParserFactory();
@@ -41,11 +43,11 @@ class ParserIncludeParseTest extends TestCase
 
     public function testIncludesParserWithDummyData()
     {
+        $testResult = ZcWiltUser::with('posts')->get()->toArray();
         Request::instance()->query->set('includes', 'posts');
         $result  = $this->getRequestResults();
-        $this->assertTrue(count($result) === 3);
-        $post0 = $result[0]['posts'];
-        $this->assertTrue($post0[0]['id'] === 1);
+        $this->assertTrue(count($result) === count($testResult));
+        $this->assertTrue(count($result[0]['posts']) === count($testResult[0]['posts']));
     }
 
     public function testIncludesParserWithDummyDataInvalidWith()
@@ -57,15 +59,17 @@ class ParserIncludeParseTest extends TestCase
 
     public function testControllerIndexWithIncludesParserPass()
     {
+        $testResult = ZcWiltUser::with('posts')->where('id', '=', 2)->get()->toArray();
         $request = Request::create('/index', 'GET', [
-            'where' => 'id:eq:1', 'includes' => 'posts'
+            'where' => 'id:eq:2', 'includes' => 'posts'
         ]);
         $controller = new ZcwiltUserController(new ModelMakerFactory());
         $response = $controller->index($request);
         $response = json_decode($response->getContent());
         $this->assertTrue(count($response->data) === 1);
-        $this->assertTrue(count($response->data[0]->posts) === 3);
+        $this->assertTrue(count($response->data[0]->posts) === count($testResult[0]['posts']));
     }
+
     public function testControllerIndexWithIncludesParserFail()
     {
         $request = Request::create('/index', 'GET', [

@@ -39,7 +39,7 @@ class ControllersTest extends TestCase
         $controller = new ZcwiltUserController(new ModelMakerFactory());
         $response = $controller->index($request);
         $response = json_decode($response->getContent());
-        $this->assertTrue(count($response->data) === 3);
+        $this->assertTrue(count($response->data) === 15); //default pagination = 15
     }
     
     public function testControllerIndexWithWhereParser()
@@ -71,7 +71,7 @@ class ControllersTest extends TestCase
         $response = $controller->show(1);
         $response = json_decode($response->getContent());
         $this->assertTrue($response->data->id === 1);
-        $response = $controller->show(11);
+        $response = $controller->show(1001);
         $response = json_decode($response->getContent());
         $this->assertTrue($response->error->message === 'item does not exist');
     }
@@ -80,10 +80,11 @@ class ControllersTest extends TestCase
     {
         $controller = new ZcwiltUserController(new ModelMakerFactory());
         $model = new ZcwiltUser();
+        $testResult = $model->all();
         $controller->destroy(1);
         $result = $model->all()->toArray();
-        $this->assertTrue(count($result) === 2);
-        $response = $controller->destroy(99);
+        $this->assertTrue(count($result) === count($testResult)-1);
+        $response = $controller->destroy(1001);
         $response = json_decode($response->getContent());
         $this->assertTrue($response->error->message === 'item does not exist');
     }
@@ -119,7 +120,7 @@ class ControllersTest extends TestCase
         ]);
         $response = $controller->store($request);
         $response = json_decode($response->getContent());
-        $this->assertTrue($response->data->id === 4);
+        $this->assertTrue($response->data->age === 38);
     }
 
     public function testControllerUpdate()
@@ -127,7 +128,7 @@ class ControllersTest extends TestCase
         $controller = new ZcwiltUserController(new ModelMakerFactory());
         $request = Request::create('/index', 'PUT', [
         ]);
-        $response = $controller->update(99, $request);
+        $response = $controller->update(1001, $request);
         $response = json_decode($response->getContent());
         $this->assertTrue($response->error->message === 'item does not exist');
         $response = $controller->update(1, $request);
@@ -136,7 +137,7 @@ class ControllersTest extends TestCase
         $message = $response->error->message->email[0];
         $this->assertContains('The email field is required.', $message);
         $request = Request::create('/index', 'POST', [
-            'email' => 'test2@gmail.com',
+            'email' => 'name1@gmail.com',
             'name' => 'Dirk Gently'
         ]);
         $response = $controller->update(1, $request);
@@ -163,7 +164,7 @@ class ControllersTest extends TestCase
         $response = json_decode($response->getContent());
         $this->assertTrue($response->data[0]->id === 2);
         $request = Request::create('/deleteByQuery', 'DELETE', [
-            'where' => 'id:eq:9'
+            'where' => 'id:eq:1001'
         ]);
         $response = $controller->destroyByQuery($request);
         $response = json_decode($response->getContent());

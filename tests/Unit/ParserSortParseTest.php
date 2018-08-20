@@ -6,6 +6,7 @@ use Zcwilt\Api\Exceptions\InvalidParserException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Request;
+use Tests\Fixtures\Models\ZcwiltUser;
 
 class ParserSortParseTest extends TestCase
 {
@@ -23,6 +24,7 @@ class ParserSortParseTest extends TestCase
         $this->expectException(InvalidParserException::class);
         $parser->parse('');
     }
+
     public function testSortParserParseTestWithParams()
     {
         $parserFactory = new ParserFactory();
@@ -34,14 +36,18 @@ class ParserSortParseTest extends TestCase
         $this->assertTrue($tokenized[1]['field'] === 'y');
         $this->assertTrue($tokenized[1]['direction'] === 'DESC');
     }
+
     public function testSortParserWithDummyData()
     {
+        $testResult = ZcWiltUser::orderBy('age', 'DESC')->get()->toArray();
         Request::instance()->query->set('sort', '-age');
         $result  = $this->getRequestResults();
-        $this->assertTrue((int)$result[0]['age'] === 30);
+        $this->assertTrue($result[0]['age'] === $testResult[0]['age']);
+
+        $testResult = ZcWiltUser::orderBy('name', 'ASC')->get()->toArray();
         Request::instance()->query->set('sort', 'name');
         $result  = $this->getRequestResults();
-        $this->assertTrue($result[0]['name'] === 'name1');
-        $this->assertTrue((int)$result[2]['age'] === 5);
+        $this->assertTrue($result[0]['name'] === $testResult[0]['name']);
+        $this->assertTrue($result[2]['age'] === $testResult[2]['age']);
     }
 }

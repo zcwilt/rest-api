@@ -2,11 +2,9 @@
 
 namespace Tests\Unit;
 
-use Zcwilt\Api\ApiQueryParser;
-use Zcwilt\Api\Exceptions\InvalidParserException;
-use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Request;
+use Tests\Fixtures\Models\ZcwiltUser;
 
 class ParserOrWhereParseTest extends TestCase
 {
@@ -19,32 +17,42 @@ class ParserOrWhereParseTest extends TestCase
 
     public function testOrWhereParserWithDummyData()
     {
+        $testResult = ZcWiltUser::orWhere('id', '=', 2)->get()->toArray();
         Request::instance()->query->set('orWhere', 'id:eq:2');
         $result  = $this->getRequestResults();
-        $this->assertTrue((int)$result[0]['age'] === 30);
+        $this->assertTrue($result[0]['age'] === $testResult[0]['age']);
         $this->assertTrue(count($result) === 1);
+
+        $testResult = ZcWiltUser::orWhere('id', '!=', 2)->get()->toArray();
         Request::instance()->query->set('orWhere', 'id:noteq:2');
         $result  = $this->getRequestResults();
-        $this->assertTrue((int)$result[0]['age'] === 15);
-        $this->assertTrue((int)$result[1]['age'] === 5);
-        $this->assertTrue(count($result) === 2);
+        $this->assertTrue($result[0]['age'] === $testResult[0]['age']);
+        $this->assertTrue($result[1]['age'] === $testResult[1]['age']);
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::orWhere('id', '<=', 2)->get()->toArray();
         Request::instance()->query->set('orWhere', 'id:lte:2');
         $result  = $this->getRequestResults();
-        $this->assertTrue((int)$result[0]['age'] === 15);
-        $this->assertTrue((int)$result[1]['age'] === 30);
-        $this->assertTrue(count($result) === 2);
+        $this->assertTrue($result[0]['age'] === $testResult[0]['age']);
+        $this->assertTrue($result[1]['age'] === $testResult[1]['age']);
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::orWhere('id', '>=', 2)->get()->toArray();
         Request::instance()->query->set('orWhere', 'id:gte:2');
         $result  = $this->getRequestResults();
-        $this->assertTrue((int)$result[0]['age'] === 30);
-        $this->assertTrue((int)$result[1]['age'] === 5);
-        $this->assertTrue(count($result) === 2);
+        $this->assertTrue($result[0]['age'] === $testResult[0]['age']);
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::orWhere('id', '>', 2)->get()->toArray();
         Request::instance()->query->set('orWhere', 'id:gt:2');
         $result  = $this->getRequestResults();
-        $this->assertTrue((int)$result[0]['age'] === 5);
-        $this->assertTrue(count($result) === 1);
-        Request::instance()->query->set('orWhere', 'id:lt:2');
+        $this->assertTrue($result[0]['age'] === $testResult[0]['age']);
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::orWhere('id', '<', 5)->get()->toArray();
+        Request::instance()->query->set('orWhere', 'id:lt:5');
         $result  = $this->getRequestResults();
-        $this->assertTrue((int)$result[0]['age'] === 15);
-        $this->assertTrue(count($result) === 1);
+        $this->assertTrue($result[0]['age'] === $testResult[0]['age']);
+        $this->assertTrue(count($result) === count($testResult));
     }
 }

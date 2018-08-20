@@ -5,14 +5,11 @@ namespace Tests;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use Tests\Fixtures\App\Models\ZcwiltDummy1;
-use Tests\Fixtures\App\ZcwiltDummy;
 use Tests\Fixtures\Models\ZcwiltPost;
 use Zcwilt\Api\ApiQueryParser;
 use Zcwilt\Api\ParserFactory;
 use Illuminate\Support\Facades\Request;
 use Tests\Fixtures\Models\ZcwiltUser;
-use Faker\Faker;
 
 abstract class TestCase extends Orchestra
 {
@@ -54,45 +51,21 @@ abstract class TestCase extends Orchestra
 
     public function seedTables()
     {
-        $user1 = ZcwiltUser::create([
-            'name' => 'name1',
-            'email' => 'test1@gmail.com',
-            'age' => 15,
-        ]);
-        $user2 = ZcwiltUser::create([
-            'name' => 'name2',
-            'email' => 'test2@gmail.com',
-            'age' => 30,
-        ]);
-        $user3 = ZcwiltUser::create([
-            'name' => 'othername',
-            'email' => 'foo@gmail.com',
-            'age' => 5,
-        ]);
+        $userTableTestData = $this->createUserTableTestData();
 
-        ZcwiltPost::create([
-            'user_id' => $user1->id,
-            'comment' => '1foo'
-        ]);
-        ZcwiltPost::create([
-            'user_id' => $user1->id,
-            'comment' => '1bar'
-        ]);
-        ZcwiltPost::create([
-            'user_id' => $user1->id,
-            'comment' => '1bin'
-        ]);
-
-        ZcwiltDummy::create([
-            'name' => 'name1',
-            'email' => 'test1@gmail.com',
-            'age' => 15,
-        ]);
-        ZcwiltDummy1::create([
-            'name' => 'name1',
-            'email' => 'test1@gmail.com',
-            'age' => 15,
-        ]);
+        foreach ($userTableTestData as $user) {
+            $userCreated = ZcwiltUser::create([
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'age' => $user['age'],
+            ]);
+            foreach ($user['posts'] as $post) {
+                ZcwiltPost::create([
+                    'user_id' => $userCreated->id,
+                    'comment' => $post['comment']
+                ]);
+            }
+        }
     }
 
     public function getRequestResults()
@@ -103,5 +76,30 @@ abstract class TestCase extends Orchestra
         $query = $api->buildQuery(new ZcwiltUser);
         $result = $query->get()->toArray();
         return $result;
+    }
+
+    private function createUserTableTestData()
+    {
+        $data = [];
+        $n = rand(16, 30);
+        for ($i = 0; $i < $n; $i++) {
+            $name = 'name' . $i;
+            $email = $name . '@gmail.com';
+            $age = rand(15, 76);
+            $posts = $this->createUserPostsTestData($i);
+            $data[] = ['name' => $name, 'email' => $email, 'age' => $age, 'posts' => $posts];
+        }
+        return $data;
+    }
+
+    private function createUserPostsTestData($userIndex)
+    {
+        $data = [];
+        $n = rand(1, 3);
+        for ($i = 0; $i < $n; $i++) {
+            $comment = 'Comment ' . $i . ' for index ' . $userIndex;
+            $data[] = ['comment' => $comment];
+        }
+        return $data;
     }
 }

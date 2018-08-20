@@ -19,11 +19,12 @@ class BuildQueryTest extends TestCase
 
     public function testBasic()
     {
+        $testResult = ZcWiltUser::all();
         $api = new ApiQueryParser(new ParserFactory());
         $api->parseRequest(Request::instance());
         $api->buildParsers();
         $query = $api->buildQuery(new ZcwiltUser);
         $result = $query->get()->toArray();
-        $this->assertTrue(count($result) === 3);
+        $this->assertTrue(count($result) === count($testResult));
     }
 }
