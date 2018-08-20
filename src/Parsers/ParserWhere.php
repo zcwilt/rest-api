@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ParserWhere extends ParserWhereAbstract
 {
-    public function prepareQuery(Builder $eloquentBuilder)
+    public function prepareQuery(Builder $eloquentBuilder): Builder
     {
         $tokenized = $this->tokenized;
         $realOperator = $this->operatorMap[$tokenized[1]];

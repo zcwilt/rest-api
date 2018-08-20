@@ -14,7 +14,7 @@ use Illuminate\Database\QueryException;
 class ApiController extends AbstractApiController
 {
     /**
-     * @var
+     * @var Illuminate\Database\Eloquent\Model
      */
     protected $model;
 
@@ -36,7 +36,7 @@ class ApiController extends AbstractApiController
         return $this->respond($result->toArray());
     }
 
-    public function store(Request $request)
+    public function store(Request $request): jsonResponse
     {
         $validator = Validator::make($request->all(), $this->loadRules());
         if ($validator->fails()) {
@@ -52,6 +52,10 @@ class ApiController extends AbstractApiController
         ]);
     }
 
+    /**
+     * @param mixed $id
+     * @return JsonResponse
+     */
     public function show($id): jsonResponse
     {
         $result = $this->model->find($id);
@@ -64,6 +68,11 @@ class ApiController extends AbstractApiController
         ]);
     }
 
+    /**
+     * @param mixed $id
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function update($id, Request $request)
     {
         $result = $this->model->find($id);
@@ -75,7 +84,6 @@ class ApiController extends AbstractApiController
             return $this->setStatusCode(400)->respondWithError($validator->errors());
         }
 
-        //dd($request->all());
         $result->update($request->all());
 
         return $this->respond([
@@ -83,6 +91,10 @@ class ApiController extends AbstractApiController
         ]);
     }
 
+    /**
+     * @param mixed $id
+     * @return JsonResponse
+     */
     public function destroy($id): jsonResponse
     {
         $result = $this->model->find($id);
@@ -112,6 +124,10 @@ class ApiController extends AbstractApiController
         ]);
     }
 
+    /**
+     * @param mixed $id
+     * @return array
+     */
     protected function loadRules($id = 0)
     {
         if (method_exists($this->model, 'rules')) {

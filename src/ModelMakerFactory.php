@@ -1,11 +1,11 @@
 <?php
 namespace Zcwilt\Api;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Model;
 
 class ModelMakerFactory
 {
-    public function make(string $className)
+    public function make(string $className): Model
     {
         $namespacePrefix = "";
         if (app()->runningUnitTests()) {

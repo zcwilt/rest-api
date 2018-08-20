@@ -21,12 +21,12 @@ abstract class ParserAbstract implements ParserInterface
         $this->tokenizeParameters($parameters);
     }
 
-    public function addQuery(Builder $eloquentBuilder)
+    public function addQuery(Builder $eloquentBuilder): Builder
     {
         return $this->prepareQuery($eloquentBuilder);
     }
 
-    public function getTokenized()
+    public function getTokenized(): array
     {
         return $this->tokenized;
     }

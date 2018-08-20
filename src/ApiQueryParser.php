@@ -104,7 +104,7 @@ class ApiQueryParser
         return $eloquentQB;
     }
 
-    protected function getQueryParams(Request $request)
+    protected function getQueryParams(Request $request): array
     {
         $params = $request->query();
         $params = array_merge($params, $request->all());

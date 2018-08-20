@@ -23,7 +23,7 @@ class ParserSort extends ParserAbstract
         }
     }
 
-    public function prepareQuery(Builder $eloquentBuilder)
+    public function prepareQuery(Builder $eloquentBuilder): Builder
     {
         foreach ($this->tokenized as $parameters) {
             $eloquentBuilder = $eloquentBuilder->orderBy($parameters['field'], $parameters['direction']);
