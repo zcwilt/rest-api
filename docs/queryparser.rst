@@ -11,6 +11,10 @@ Currently the filter parser supports
 - orWhereIn
 - whereNotIn
 - orWhereNotIn
+- whereBetween
+- whereNotBetween
+- orWhereBetween
+- orWhereNotBetween
 
 Sorting allows for multiple sort targets for ascending, descending sorts.
 
