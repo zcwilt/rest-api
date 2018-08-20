@@ -5,7 +5,6 @@ namespace Zcwilt\Api\Controllers;
 use Illuminate\Http\Request;
 use Zcwilt\Api\ApiQueryParser;
 use Zcwilt\Api\ParserFactory;
-use Illuminate\Database\Eloquent\Model;
 use Zcwilt\Api\ModelMakerFactory;
 use Illuminate\Http\JsonResponse;
 use Validator;

@@ -31,6 +31,7 @@ or to use the default User model that comes with Laravel
 ::
 
     Route::resource('user', 'Api\UserController');
+    Route::delete('user', 'Api\UserController@destroyByQuery');
 
 
 For each Laravel Model that you want to use in the API, you will need to create a Controller
@@ -62,6 +63,39 @@ The controller definition is fairly simple
     ::
 
         protected $modelName = 'ModelName';
+
+
+Api Endpoints
+-------------
+
+The api endpoints provided by the resource controller and extra controller methods provide the following route/actions
+
+
+::
+
+    GET api/modelname -> controller@index : allows for query filtering
+
+
+::
+
+    GET api/modelname/{id} -> controller@show
+
+::
+
+    POST api/modelname -> controller@store
+
+::
+
+    PUT api/modelname/{id} -> controller@update
+
+::
+
+    DELETE api/modelname/{id} - controller@destroy
+
+::
+
+    DELETE api/modelname - controller@destroyByQuery : allows for query filtering
+
 
 Authorization
 -------------
