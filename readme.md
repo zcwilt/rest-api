@@ -14,6 +14,11 @@ Full documentation is available [here](https://laravel-rest-api.readthedocs.io/e
 
 but see examples below for an idea of what the package provides.
 
+## Installation ##
+
+``composer require zcwilt/rest-api``
+
+
 ## Filtering ##
 
 Examples 
@@ -40,4 +45,7 @@ You can restrict columns using
 
     {api-uri}?columns=id,name
     
-    
+## Lots More ##
+
+Lots more filtering options are available.
+see the [Documentation](https://laravel-rest-api.readthedocs.io/en/latest/)    
