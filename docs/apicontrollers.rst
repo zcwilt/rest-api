@@ -97,6 +97,14 @@ The api endpoints provided by the resource controller and extra controller metho
     DELETE api/modelname - controller@destroyByQuery : allows for query filtering
 
 
+Pagination
+----------
+
+All results from the ``index`` route are paginated using the standard Laravel paginator
+Therefore you can add a ``page`` and `per_page`` parameter to those queries.
+You can also return all results by adding ``paginate=no`` to the query string.
+
+
 Authorization
 -------------
 
