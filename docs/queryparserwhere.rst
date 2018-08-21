@@ -30,6 +30,8 @@ The operators allowed are
 - gte equates to >=
 - gt equates to >
 - lt equates to <
+- lk equates to LIKE
+- nlk equates to NOT LIKE
 
 Can also use orWhere
 

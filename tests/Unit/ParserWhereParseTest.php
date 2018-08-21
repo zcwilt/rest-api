@@ -34,6 +34,7 @@ class ParserWhereParseTest extends TestCase
         $this->assertTrue($tokenized[1] === 'eq');
         $this->assertTrue($tokenized[2] === '1');
     }
+
     public function testWhereParserParseTestInvalidParams()
     {
         $parserFactory = new ParserFactory();
@@ -87,6 +88,36 @@ class ParserWhereParseTest extends TestCase
         Request::instance()->query->set('where', 'id:lt:2');
         $result  = $this->getRequestResults();
         $this->assertTrue($result[0]['age'] === $testResult[0]['age']);
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::where('name', 'LIKE', 'name%')->get()->toArray();
+        Request::instance()->query->set('where', 'name:lk:name%');
+        $result  = $this->getRequestResults();
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::where('name', 'LIKE', '%nam%')->get()->toArray();
+        Request::instance()->query->set('where', 'name:lk:%nam%');
+        $result  = $this->getRequestResults();
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::where('email', 'LIKE', '%com')->get()->toArray();
+        Request::instance()->query->set('where', 'email:lk:%com');
+        $result  = $this->getRequestResults();
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::where('name', 'NOT LIKE', 'name%')->get()->toArray();
+        Request::instance()->query->set('where', 'name:nlk:name%');
+        $result  = $this->getRequestResults();
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::where('name', 'NOT LIKE', '%nam%')->get()->toArray();
+        Request::instance()->query->set('where', 'name:nlk:%nam%');
+        $result  = $this->getRequestResults();
+        $this->assertTrue(count($result) === count($testResult));
+
+        $testResult = ZcWiltUser::where('email', 'NOT LIKE', '%com')->get()->toArray();
+        Request::instance()->query->set('where', 'email:nlk:%com');
+        $result  = $this->getRequestResults();
         $this->assertTrue(count($result) === count($testResult));
     }
 }

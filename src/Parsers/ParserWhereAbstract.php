@@ -9,7 +9,16 @@ abstract class ParserWhereAbstract extends ParserAbstract
     /**
      * @var array
      */
-    protected $operatorMap = ['eq' => '=', 'noteq' => '!=', 'lte' => '<=', 'gte' => '>=', 'gt' => '>', 'lt' => '<'];
+    protected $operatorMap = [
+        'eq' => '=',
+        'noteq' => '!=',
+        'lte' => '<=',
+        'gte' => '>=',
+        'gt' => '>',
+        'lt' => '<',
+        'lk' => 'LIKE',
+        'nlk' => 'NOT LIKE',
+    ];
 
     public function tokenizeParameters(string $parameters)
     {
