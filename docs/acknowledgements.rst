@@ -23,3 +23,7 @@ The following projects also provided inspiration.
 - `Froiden/laravel-rest-api <https://github.com/Froiden/laravel-rest-api>`_
 
 
+Thanks also to the guys from Reddit who helped
+
+- `/u/tusconflyer <https://www.reddit.com/user/tucsonflyer>`_
+- `/u/somethingeneric <https://www.reddit.com/user/somethingeneric>`_
