@@ -34,3 +34,30 @@ Query results by default return all columns for the query, however can use the c
     queryparserincludes
 
 
+URL Parameter Format
+--------------------
+
+Most examples you will see in the documentation show URL parameters in a simple format
+
+e.g ``{api-uri}?columns=id,name&where(id:eq:1)``
+
+However this format will break if you need to include multiple copies of a parser
+
+consider this
+
+``{api-uri}?columns=id,name&where=id:eq:1&orWhereBetween=age:(10,15)&orWhereBetween=age:(50,60)``
+
+The above query will not work as the PHP/Laravel request will only be able to choose one of the orWhereBetween clauses.
+
+In these cases you will need to use the standard bracket notation for GET URLS
+
+e.g.
+
+``{api-uri}?columns=id,name&where=id:eq:1&orWhereBetween[]=age:(10,15)&orWhereBetween[]=age:(50,60)``
+
+
+.. note:: You only need to use bracket notation e.g. ``&orWhereBetween[]=age:(10,15)`` if you have multiple parsers of a certain type.
+    However for simplicity and consistency, we would suggest using bracket notation all the time.
+
+
+

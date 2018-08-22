@@ -68,10 +68,13 @@ abstract class TestCase extends Orchestra
         }
     }
 
-    public function getRequestResults()
+    public function getRequestResults($request = null)
     {
+        if (!isset($request)) {
+            $request = Request::instance();
+        }
         $api = new ApiQueryParser(new ParserFactory());
-        $api->parseRequest(Request::instance());
+        $api->parseRequest($request);
         $api->buildParsers();
         $query = $api->buildQuery(new ZcwiltUser);
         $result = $query->get()->toArray();
