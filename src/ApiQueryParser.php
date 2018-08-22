@@ -85,7 +85,17 @@ class ApiQueryParser
     protected function parseKeys()
     {
         foreach ($this->parsedKeys as $action => $parameters) {
-            $this->callParser($action, (string)$parameters);
+            if (!is_array($parameters)) {
+                $parameters = [$parameters];
+            }
+            $this->parseKeysFromArray($action, $parameters);
+        }
+    }
+
+    protected function parseKeysFromArray(string $action, array $parameters)
+    {
+        foreach ($parameters as $parameter) {
+            $this->callParser($action, (string)$parameter);
         }
     }
 

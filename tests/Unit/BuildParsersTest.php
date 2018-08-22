@@ -28,4 +28,16 @@ class BuildParsersTest extends TestCase
         $this->assertTrue($tokenized['field'] === 'foo');
         $this->assertTrue($tokenized['direction'] === 'ASC');
     }
+    public function testParserWithArrays()
+    {
+        $api = new ApiQueryParser(new ParserFactory());
+        $request = Request::create('/index', 'GET', [
+            'where' => ['id:eq:2', 'id:eq:3']
+        ]);
+        $api->parseRequest($request);
+        $api->buildParsers();
+        $tokenized = $api->getQueryParts();
+        $this->assertTrue($tokenized[0]->getTokenized()[2] === '2');
+        $this->assertTrue($tokenized[1]->getTokenized()[2] === '3');
+    }
 }
