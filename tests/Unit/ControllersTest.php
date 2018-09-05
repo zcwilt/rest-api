@@ -169,6 +169,12 @@ class ControllersTest extends TestCase
         $response = $controller->destroyByQuery($request);
         $response = json_decode($response->getContent());
         $this->assertTrue(count($response->data) === 0);
+        $request = Request::create('/deleteByQuery', 'DELETE', [
+            'where' => 'foo:eq'
+        ]);
+        $response = $controller->destroyByQuery($request);
+        $response = json_decode($response->getContent());
+        $this->assertTrue($response->error->message === 'where parser - invalid parameters');
     }
 
     public function testControllerAppNamespace()

@@ -2,6 +2,6 @@
 
 namespace Zcwilt\Api\Exceptions;
 
-class InvalidParserException extends \Exception
+class InvalidParserException extends ApiException
 {
 }

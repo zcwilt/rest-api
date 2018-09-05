@@ -4,6 +4,7 @@ namespace Zcwilt\Api\Controllers;
 
 use Illuminate\Http\Request;
 use Zcwilt\Api\ApiQueryParser;
+use Zcwilt\Api\Exceptions\ApiException;
 use Zcwilt\Api\ParserFactory;
 use Zcwilt\Api\ModelMakerFactory;
 use Illuminate\Http\JsonResponse;
@@ -35,7 +36,8 @@ class ApiController extends AbstractApiController
             }
             $result = $query->paginate($request->input('per_page', $defaultPerpage));
         } catch (\Exception $e) {
-            return $this->setStatusCode(400)->respondWithError($e->getMessage());
+            $message = $this->handleExceptionMessage($e);
+            return $this->setStatusCode(400)->respondWithError($message);
         }
         return $this->respond($result->toArray());
     }
@@ -48,8 +50,9 @@ class ApiController extends AbstractApiController
         }
         try {
             $result = $this->model->create($request->all());
-        } catch (QueryException $e) {
-            return $this->setStatusCode(400)->respondWithError($e->getMessage());
+        } catch (\Exception $e) {
+            $message = $this->handleExceptionMessage($e);
+            return $this->setStatusCode(400)->respondWithError($message);
         }
         return $this->respond([
             'data' => $result
@@ -117,7 +120,8 @@ class ApiController extends AbstractApiController
             $parser = new ApiQueryParser(new ParserFactory());
             $query = $parser->parseRequest($request)->buildparsers()->buildQuery($this->model);
         } catch (\Exception $e) {
-            return $this->setStatusCode(400)->respondWithError($e->getMessage());
+            $message = $this->handleExceptionMessage($e);
+            return $this->setStatusCode(400)->respondWithError($message);
         }
         $result=$query->get();
         $query->each(function ($record) {
