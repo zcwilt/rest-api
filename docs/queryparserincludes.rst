@@ -9,12 +9,5 @@ example
 
     {api-uri}?includes=posts
 
-The above assumes th query is being sone on a model that has a relationship defined
-
-e.g.
-
-::
-
-@todo
-
+The above assumes the query is being done on a model that has a relationship defined
 

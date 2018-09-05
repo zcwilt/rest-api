@@ -16,7 +16,7 @@ Currently the filter parser supports
 - orWhereBetween
 - orWhereNotBetween
 
-Sorting allows for multiple sort targets for ascending, descending sorts.
+Sorting allows for multiple sort targets for ascending and descending sorts.
 
 Includes allows for loading child models.
 
