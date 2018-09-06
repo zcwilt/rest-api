@@ -11,6 +11,7 @@ zcwilt/rest-api uses resource controllers. To define your routes for each contro
 
     Route::resource('modelName', 'controller');
     Route::delete('modelName', 'controller@destroyByQuery');
+    Route::put('modelName', 'controller@updateByQuery');
 
 
 ``modelName`` is the model name you want to have api access.
@@ -24,6 +25,7 @@ As an example. To use the dummy simple controller supplied by the project, your 
 
     Route::resource('dummySimple', 'Api\DummySimpleController');
     Route::delete('dummySimple', 'Api\DummySimpleController@destroyByQuery');
+    Route::put('dummySimple', 'Api\DummySimpleController@updateByQuery');
 
 
 or to use the default User model that comes with Laravel
@@ -32,6 +34,7 @@ or to use the default User model that comes with Laravel
 
     Route::resource('user', 'Api\UserController');
     Route::delete('user', 'Api\UserController@destroyByQuery');
+    Route::put('user', 'Api\UserController@updateByQuery');
 
 
 For each Laravel Model that you want to use in the API, you will need to create a Controller

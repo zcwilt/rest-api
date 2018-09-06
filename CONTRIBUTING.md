@@ -46,3 +46,15 @@ The body should include the motivation for the change and contrast this with pre
 ### Footer
 The footer should contain any information about **Breaking Changes** and is also the place to
 reference GitHub issues that this commit **Closes**.
+
+### Documentation
+
+Documentation for the project is available on [ReadTheDocs](https://laravel-rest-api.readthedocs.io/en/latest/).
+
+In the repo it is stored in the ``/docs`` folder.
+
+If you want to contribute to this documentation, you are advised to install [Sphinx](http://www.sphinx-doc.org/en/master/index.html) and
+familiarize yourself with [reStructured Text](http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html)
+
+After making changes loocally to this documentation you change into the ``/docs`` folder and 
+do ``make clean html``. This will rebuild the documentation in ``/docs/_build/html`` where you can view your changes. 
