@@ -132,6 +132,21 @@ class ApiController extends AbstractApiController
         ]);
     }
 
+    public function updateByQuery(Request $request): jsonResponse
+    {
+        try {
+            $parser = new ApiQueryParser(new ParserFactory());
+            $query = $parser->parseRequest($request)->buildparsers()->buildQuery($this->model);
+            $result = $query->update($request->all()['fields']);
+        } catch (\Exception $e) {
+            $message = $this->handleExceptionMessage($e);
+            return $this->setStatusCode(400)->respondWithError($message);
+        }
+        return $this->respond([
+            'data' => 'affected rows = ' . $result
+        ]);
+    }
+
     /**
      * @param mixed $id
      * @return array

@@ -83,10 +83,21 @@ The api endpoints provided by the resource controller and extra controller metho
 ::
 
     POST api/modelname -> controller@store
+    The request body should be an array of field/values
+    e.g ['name' => 'foo', 'email' => 'bar@test.com']
 
 ::
 
     PUT api/modelname/{id} -> controller@update
+    The request body should be an array of field/values
+    e.g ['name' => 'foo', 'email' => 'bar@test.com']
+
+::
+
+    PUT api/modelname -> controller@updateByQuery : allows for query filtering
+    The request body should be an array of parser clauses however  field name/values
+    should be set in a fields array
+    e.g ['where' => 'status:eq:1', 'fields' => [name' => 'foo', 'email' => 'bar@test.com']]
 
 ::
 
@@ -95,25 +106,13 @@ The api endpoints provided by the resource controller and extra controller metho
 ::
 
     DELETE api/modelname - controller@destroyByQuery : allows for query filtering
+    The request body should be an array of parser clauses
+    e.g ['where' => ''status:eq:1]
 
 
 Pagination
 ----------
 
 All results from the ``index`` route are paginated using the standard Laravel paginator
-Therefore you can add a ``page`` and `per_page`` parameter to those queries.
+Therefore you can add a ``page`` and ``per_page`` parameter to those queries.
 You can also return all results by adding ``paginate=no`` to the query string.
-
-
-Authorization
--------------
-
-This project/code is agnostic as to how you provide authorization for your API.
-
-It's expected that you may need to extend the Api Controller to provide authorization and/or role/scope based access.
-
-There will be some more documentation here regarding Authorizartion etc, and you can also look at
-
-`zcwilt/rest-api-demo <https://github.com/zcwilt/rest-api-demo/>`_
-
-which will give some examples of implementing the rest api and how to do authorization.
