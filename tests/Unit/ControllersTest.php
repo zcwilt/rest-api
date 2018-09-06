@@ -229,7 +229,6 @@ class ControllersTest extends TestCase
         ]);
         $response = $controller->updateByQuery($request);
         $response = json_decode($response->getContent());
-//        dd($response);
-        $this->assertContains('no such column', $response->error->message);
+        $this->assertContains('SQLSTATE', $response->error->message);
     }
 }
