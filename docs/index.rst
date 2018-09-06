@@ -15,6 +15,7 @@ for more details.
     installation
     queryparser
     apicontrollers
+    authorization
     testing
     contributing
     acknowledgements

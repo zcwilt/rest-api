@@ -148,6 +148,7 @@ class ControllersTest extends TestCase
             'email' => 'dirk@holisticdetective.com',
             'name' => 'Dirk Gently'
         ]);
+
         $response = $controller->update(1, $request);
         $response = json_decode($response->getContent());
         $this->assertTrue($response->data->id === 1);
@@ -202,5 +203,32 @@ class ControllersTest extends TestCase
     {
         $this->expectException(\Exception::class);
         new ZcwiltDummy2Controller(new ModelMakerFactory());
+    }
+
+    public function testUpdateByQuery()
+    {
+        $controller = new ZcwiltUserController(new ModelMakerFactory());
+        $request = Request::create('/UpdateByQuery', 'PUT', [
+            'where' => 'id:eq:2', 'fields' => ['name' => 'foobar']
+        ]);
+        $response = $controller->updateByQuery($request);
+        $response = json_decode($response->getContent());
+        $this->assertTrue($response->data === 'affected rows = 1');
+        $request = Request::create('/index', 'GET', [
+            'where' => 'id:eq:2'
+        ]);
+        $controller = new ZcwiltUserController(new ModelMakerFactory());
+        $response = $controller->index($request);
+        $response = json_decode($response->getContent());
+        $this->assertTrue(count($response->data) === 1);
+        $this->assertTrue($response->data[0]->name === 'foobar');
+
+        $controller = new ZcwiltUserController(new ModelMakerFactory());
+        $request = Request::create('/UpdateByQuery', 'PUT', [
+            'where' => 'id:eq:2', 'fields' => ['nam' => 'foobar']
+        ]);
+        $response = $controller->updateByQuery($request);
+        $response = json_decode($response->getContent());
+        $this->assertContains('SQLSTATE', $response->error->message);
     }
 }
