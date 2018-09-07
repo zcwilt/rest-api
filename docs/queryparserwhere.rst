@@ -65,7 +65,7 @@ Can also use
 Where Between Clauses
 ---------------------
 
-Where In clauses take the form of
+Where Between clauses take the form of
 
 ::
 

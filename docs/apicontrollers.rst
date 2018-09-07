@@ -37,7 +37,7 @@ or to use the default User model that comes with Laravel
     Route::put('user', 'Api\UserController@updateByQuery');
 
 
-For each Laravel Model that you want to use in the API, you will need to create a Controller
+For each Laravel Model that you want to use in the API you will need to create a Controller
 
 Controller Definition
 ---------------------

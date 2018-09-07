@@ -1,7 +1,7 @@
 Query Parser
 ============
 
-The query parser allows for complex filtering, sorting, use of child relations and more.
+The query parser allows for complex filtering, sorting, the use of child relations and more.
 
 Currently the filter parser supports
 
@@ -20,9 +20,10 @@ Currently the filter parser supports
 
 Sorting allows for multiple sort targets for ascending and descending sorts.
 
-Includes allows for loading child models.
+Includes allow for loading child models.
 
-Query results by default return all columns for the query, however can use the columns filter to restrict which columns are returned.
+Query results by default return all columns for the query, however you can use the columns filter to restrict which
+columns are returned.
 
 
 

@@ -1,7 +1,7 @@
 Introduction
 ============
 
-zcwilt/rest-api is written for Laravel, and provides a query parser and api controllers for CRUD type actions.
+zcwilt/rest-api is written for Laravel and provides a query parser and api controllers for CRUD type actions.
 
 The query parser allows for complex filtering and sorting, converting the URI query into eloquent queries.
 
