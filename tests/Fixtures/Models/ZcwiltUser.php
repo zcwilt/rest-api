@@ -2,9 +2,12 @@
 namespace Tests\Fixtures\Models;
 
 use \Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ZcwiltUser extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = ['name', 'email', 'age'];
 
     public function rules($id = 0)
