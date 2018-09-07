@@ -15,6 +15,8 @@ Currently the filter parser supports
 - whereNotBetween
 - orWhereBetween
 - orWhereNotBetween
+- withTrashed
+- onlyTrashed
 
 Sorting allows for multiple sort targets for ascending and descending sorts.
 
@@ -29,6 +31,7 @@ Query results by default return all columns for the query, however can use the c
     :hidden:
 
     queryparserwhere
+    queryparsersoftdeletes
     queryparsersorting
     queryparsercolumns
     queryparserincludes

@@ -76,19 +76,6 @@ class ControllersTest extends TestCase
         $this->assertTrue($response->error->message === 'item does not exist');
     }
 
-    public function testControllerSimpleDelete()
-    {
-        $controller = new ZcwiltUserController(new ModelMakerFactory());
-        $model = new ZcwiltUser();
-        $testResult = $model->all();
-        $controller->destroy(1);
-        $result = $model->all()->toArray();
-        $this->assertTrue(count($result) === count($testResult)-1);
-        $response = $controller->destroy(1001);
-        $response = json_decode($response->getContent());
-        $this->assertTrue($response->error->message === 'item does not exist');
-    }
-
     public function testControllerStoreFails()
     {
         $controller = new ZcwiltUserController(new ModelMakerFactory());
@@ -153,29 +140,6 @@ class ControllersTest extends TestCase
         $response = json_decode($response->getContent());
         $this->assertTrue($response->data->id === 1);
         $this->assertTrue($response->data->name === 'Dirk Gently');
-    }
-
-    public function testControllerDeleteByQuery()
-    {
-        $controller = new ZcwiltUserController(new ModelMakerFactory());
-        $request = Request::create('/deleteByQuery', 'DELETE', [
-            'where' => 'id:eq:2'
-        ]);
-        $response = $controller->destroyByQuery($request);
-        $response = json_decode($response->getContent());
-        $this->assertTrue($response->data[0]->id === 2);
-        $request = Request::create('/deleteByQuery', 'DELETE', [
-            'where' => 'id:eq:1001'
-        ]);
-        $response = $controller->destroyByQuery($request);
-        $response = json_decode($response->getContent());
-        $this->assertTrue(count($response->data) === 0);
-        $request = Request::create('/deleteByQuery', 'DELETE', [
-            'where' => 'foo:eq'
-        ]);
-        $response = $controller->destroyByQuery($request);
-        $response = json_decode($response->getContent());
-        $this->assertTrue($response->error->message === 'where parser - invalid parameters');
     }
 
     public function testControllerAppNamespace()

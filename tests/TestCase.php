@@ -39,6 +39,7 @@ abstract class TestCase extends Orchestra
             $table->string('email', 100)->unique();
             $table->integer('age');
             $table->timestamps();
+            $table->softDeletes();
         });
         Schema::dropIfExists('zcwilt_posts');
         Schema::create('zcwilt_posts', function (Blueprint $table) {
