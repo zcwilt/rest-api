@@ -4,8 +4,6 @@
 
 Note 
 
-The project is still under development and not quite ready for use.
-
 Api Query Builder allows for complex filtering, sorting via an api endpoint.
 
 It is intended to be part of a larger package that also provides full CRUD abilities for a Laravel API.
