@@ -11,7 +11,7 @@ class ParserFactory
     {
         $classname = __NAMESPACE__ . '\\Parsers\\' . 'Parser' . ucfirst($method);
         if (!class_exists($classname)) {
-            throw new InvalidParserException("Can't find parser class");
+            throw new InvalidParserException("Can't find parser class " . $classname);
         }
         $class = new $classname();
         return $class;

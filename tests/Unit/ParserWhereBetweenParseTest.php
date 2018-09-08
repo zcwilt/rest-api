@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use Zcwilt\Api\ApiQueryParser;
 use Zcwilt\Api\Exceptions\InvalidParserException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;

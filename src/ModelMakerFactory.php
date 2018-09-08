@@ -2,6 +2,7 @@
 namespace Zcwilt\Api;
 
 use Illuminate\Database\Eloquent\Model;
+use Zcwilt\Api\Exceptions\InvalidModelException;
 
 class ModelMakerFactory
 {
@@ -23,6 +24,6 @@ class ModelMakerFactory
             $className = ucfirst($className);
             return new $className;
         }
-        throw new \Exception($className);
+        throw new InvalidModelException($className);
     }
 }

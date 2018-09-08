@@ -2,14 +2,10 @@
 
 namespace Tests\Unit;
 
-use Tests\Fixtures\Controllers\Api\ZcwiltDummyController;
-use Tests\Fixtures\Controllers\Api\ZcwiltDummy1Controller;
-use Tests\Fixtures\Controllers\Api\ZcwiltDummy2Controller;
 use Tests\Fixtures\Controllers\Api\ZcwiltUserController;
 use Zcwilt\Api\ModelMakerFactory;
 use Illuminate\Support\Facades\Request;
 use Tests\TestCase;
-use Tests\Fixtures\Models\ZcwiltUser;
 
 class PaginationTest extends TestCase
 {
