@@ -1,5 +1,14 @@
 {
   "name": "zcwilt/rest-api",
+  "type": "library",
+  "license": "MIT",
+  "description": "An API framework for Laravel",
+  "keywords": ["rest", "api", "laravel"],
+  "authors": [
+    {
+      "name": "Ian C Wilson"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Zcwilt\\Api\\": "src/"
@@ -21,6 +30,5 @@
     }
   },
   "minimum-stability": "dev",
-  "prefer-stable": true,
-  "license": "MIT"
+  "prefer-stable": true
 }
