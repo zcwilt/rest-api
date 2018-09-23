@@ -8,13 +8,13 @@ Simple where clauses take the format of
 
 ::
 
-    {api-uri}?where=fieldname:operator:value
+    {api-uri}?where[]=fieldname:operator:value
 
 for example
 
 ::
 
-    {api-uri}?where=id:eq:1
+    {api-uri}?where[]=id:eq:1
 
 would equate to an eloquent query of
 
@@ -37,7 +37,7 @@ Can also use orWhere
 
 ::
 
-    {api-uri}?orWhere=id:eq:1
+    {api-uri}?orWhere[]=id:eq:1
 
 
 Where In clauses
@@ -47,13 +47,13 @@ Where In clauses take the form of
 
 ::
 
-    {api-uri}?whereIn=fieldname:(comma separate list)
+    {api-uri}?whereIn[]=fieldname:(comma separate list)
 
 For example
 
 ::
 
-    {api-uri}?whereIn=id:(1,2,3)
+    {api-uri}?whereIn[]=id:(1,2,3)
 
 Can also use
 
@@ -69,13 +69,13 @@ Where Between clauses take the form of
 
 ::
 
-    {api-uri}?whereBetween=fieldname:start:end
+    {api-uri}?whereBetween[]=fieldname:start:end
 
 For example
 
 ::
 
-    {api-uri}?whereBetween=age:18:45
+    {api-uri}?whereBetween[]=age:18:45
 
 Can also use
 

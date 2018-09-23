@@ -7,7 +7,7 @@ example
 
 ::
 
-    {api-uri}?includes=posts
+    {api-uri}?includes[]=posts
 
 The above assumes the query is being done on a model that has a relationship defined
 

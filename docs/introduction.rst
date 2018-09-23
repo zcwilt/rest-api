@@ -13,7 +13,7 @@ e.g.
 
 ::
 
-    delete ?whereIn=id:(1,2)
+    delete ?whereIn[]=id:(1,2)
 
     update ?whereBetween=age:30:60  @todo
 
@@ -23,9 +23,9 @@ Some examples of filtering/Sorting etc
 
 ::
 
-    {api-uri}?where=id:eq:2
+    {api-uri}?where[]=id:eq:2
 
-    {api-uri}?whereIn=id:(1,2)
+    {api-uri}?whereIn[]=id:(1,2)
 
-    {api-uri}?sort=id,-name
+    {api-uri}?sort[]=id,-name
 

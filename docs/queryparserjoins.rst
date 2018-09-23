@@ -7,7 +7,7 @@ example
 
 ::
 
-    {api-uri}?join=joinType:tableName:leftKey:rightKey
+    {api-uri}?join[]=joinType:tableName:leftKey:rightKey
 
 The join clause takes 4 parameters
 
@@ -21,6 +21,6 @@ More examples
 
 ::
 
-    {api-uri}?join=inner:posts:posts.user_id:users.id
+    {api-uri}?join[]=inner:posts:posts.user_id:users.id
     same as
     $model->join('posts', 'posts.user_id', '=', 'users.id', 'inner');

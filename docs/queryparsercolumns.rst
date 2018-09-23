@@ -5,7 +5,7 @@ example
 
 ::
 
-    {api-uri}?columns=id,name
+    {api-uri}?columns[]=id,name
 
 will restict the returned columns to just id and name.
 

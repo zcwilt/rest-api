@@ -46,7 +46,7 @@ URL Parameter Format
 
 Most examples you will see in the documentation show URL parameters in a simple format
 
-e.g ``{api-uri}?columns=id,name&where(id:eq:1)``
+e.g ``{api-uri}?columns=id,name&where=id:eq:1``
 
 However this format will break if you need to include multiple copies of a parser
 
