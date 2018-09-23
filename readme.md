@@ -1,5 +1,9 @@
 # Api Query Builder #
 
+[![Build Status](https://img.shields.io/circleci/project/github/zcwilt/rest-api/master.svg)](https://circleci.com/gh/zcwilt/rest-api)
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/zcwilt/rest-api/blob/master/LICENSE)
+[![Read the Docs](https://readthedocs.org/projects/laravel-rest-api/badge/?version=latest&style=flat)](https://laravel-rest-api.readthedocs.io/en/latest/)
+
 ## Introduction ##
 
 Note 
