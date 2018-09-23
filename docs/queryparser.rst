@@ -22,6 +22,8 @@ Sorting allows for multiple sort targets for ascending and descending sorts.
 
 Includes allow for loading child models.
 
+Joins are also supported
+
 Query results by default return all columns for the query, however you can use the columns filter to restrict which
 columns are returned.
 
@@ -36,6 +38,7 @@ columns are returned.
     queryparsersorting
     queryparsercolumns
     queryparserincludes
+    queryparserjoins
 
 
 URL Parameter Format
