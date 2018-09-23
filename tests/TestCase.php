@@ -46,6 +46,7 @@ abstract class TestCase extends Orchestra
             $table->increments('id');
             $table->integer('user_id');
             $table->string('comment');
+            $table->boolean('published');
             $table->timestamps();
         });
     }
@@ -63,7 +64,8 @@ abstract class TestCase extends Orchestra
             foreach ($user['posts'] as $post) {
                 ZcwiltPost::create([
                     'user_id' => $userCreated->id,
-                    'comment' => $post['comment']
+                    'comment' => $post['comment'],
+                    'published' => $post['published']
                 ]);
             }
         }
@@ -99,10 +101,12 @@ abstract class TestCase extends Orchestra
     private function createUserPostsTestData($userIndex)
     {
         $data = [];
-        $n = rand(1, 3);
+        $n = rand(1, 5);
+        $published = 0;
         for ($i = 0; $i < $n; $i++) {
+            $published = !$published;
             $comment = 'Comment ' . $i . ' for index ' . $userIndex;
-            $data[] = ['comment' => $comment];
+            $data[] = ['comment' => $comment, 'published' => $published];
         }
         return $data;
     }
