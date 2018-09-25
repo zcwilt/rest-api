@@ -3,6 +3,7 @@
 namespace Zcwilt\Api\Parsers;
 
 use Illuminate\Database\Eloquent\Builder;
+use Zcwilt\Api\Exceptions\ApiException;
 
 class ParserWithTrashed extends ParserAbstract
 {
@@ -13,7 +14,11 @@ class ParserWithTrashed extends ParserAbstract
 
     public function prepareQuery(Builder $eloquentBuilder): Builder
     {
-        $eloquentBuilder = $eloquentBuilder->withTrashed();
+        try {
+            $eloquentBuilder = $eloquentBuilder->withTrashed();
+        } catch (\BadMethodCallException $e) {
+            throw new ApiException('Model does not support soft deletes');
+        }
         return $eloquentBuilder;
     }
 }

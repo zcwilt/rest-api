@@ -3,10 +3,12 @@
 namespace Tests\Unit;
 
 use Tests\Fixtures\Controllers\Api\ZcwiltUserController;
+use Tests\Fixtures\Controllers\Api\ZcwiltDummyController;
 use Zcwilt\Api\ModelMakerFactory;
 use Illuminate\Support\Facades\Request;
 use Tests\TestCase;
 use Tests\Fixtures\Models\ZcwiltUser;
+use Zcwilt\Api\Exceptions\ApiException;
 
 class ControllersDeleteTest extends TestCase
 {
@@ -73,7 +75,6 @@ class ControllersDeleteTest extends TestCase
     public function testControllerDeleteShowOnlyTrashed()
     {
         $controller = new ZcwiltUserController(new ModelMakerFactory());
-        $model = new ZcwiltUser();
         $controller->destroy(1);
 
         $request = Request::create('/index', 'GET', [
@@ -84,5 +85,26 @@ class ControllersDeleteTest extends TestCase
         $response = json_decode($response->getContent());
 
         $this->assertTrue(count($response->data) === 1);
+    }
+
+    public function testControllerShowOnlyTrashedInvalid()
+    {
+        $request = Request::create('/index', 'GET', [
+            'onlyTrashed' => '', 'paginate' => 'no'
+        ]);
+        $controller = new ZcwiltDummyController(new ModelMakerFactory());
+        $response = $controller->index($request);
+        $response = json_decode($response->getContent());
+        $this->assertTrue($response->error->message === 'Model does not support soft deletes');
+    }
+    public function testControllerShowWithTrashedInvalid()
+    {
+        $request = Request::create('/index', 'GET', [
+            'withTrashed' => '', 'paginate' => 'no'
+        ]);
+        $controller = new ZcwiltDummyController(new ModelMakerFactory());
+        $response = $controller->index($request);
+        $response = json_decode($response->getContent());
+        $this->assertTrue($response->error->message === 'Model does not support soft deletes');
     }
 }

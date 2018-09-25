@@ -60,6 +60,7 @@ abstract class TestCase extends Orchestra
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'age' => $user['age'],
+                'deleted_at' => $user['deleted_at'],
             ]);
             foreach ($user['posts'] as $post) {
                 ZcwiltPost::create([
@@ -88,12 +89,15 @@ abstract class TestCase extends Orchestra
     {
         $data = [];
         $n = rand(16, 30);
+        $softDeleted = 0;
         for ($i = 0; $i < $n; $i++) {
+            $softDeleted = !$softDeleted;
             $name = 'name' . $i;
             $email = $name . '@gmail.com';
             $age = rand(15, 76);
+            $deleted_at = ($softDeleted) ? now() : null;
             $posts = $this->createUserPostsTestData($i);
-            $data[] = ['name' => $name, 'email' => $email, 'age' => $age, 'posts' => $posts];
+            $data[] = ['name' => $name, 'email' => $email, 'age' => $age, 'deleted_at' => $deleted_at, 'posts' => $posts];
         }
         return $data;
     }
