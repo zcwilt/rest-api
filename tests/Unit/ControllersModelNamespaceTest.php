@@ -4,11 +4,13 @@ namespace Tests\Unit;
 
 use Tests\Fixtures\Controllers\Api\ZcwiltDummyController;
 use Tests\Fixtures\Controllers\Api\ZcwiltDummy1Controller;
+use Tests\Fixtures\Controllers\Api\ZcwiltDummy2Controller;
 use Zcwilt\Api\ModelMakerFactory;
 use Illuminate\Support\Facades\Request;
 use Tests\TestCase;
+use Zcwilt\Api\Exceptions\InvalidModelException;
 
-class ControllersNamespaceTest extends TestCase
+class ControllersModelNamespaceTest extends TestCase
 {
     public function setUp()
     {
@@ -37,5 +39,11 @@ class ControllersNamespaceTest extends TestCase
         $response = $controller->index($request);
         $response = json_decode($response->getContent());
         $this->assertTrue(count($response->data) === 0);
+    }
+
+    public function testControllerInvalidModel()
+    {
+        $this->expectException(InvalidModelException::class);
+        new ZcwiltDummy2Controller(new ModelMakerFactory());
     }
 }
