@@ -74,8 +74,9 @@ class ApiQueryParser
 
     protected function gatherKeys(Request $request)
     {
+        $ignoreKeys = ['page', 'per_page', 'paginate', 'fields'];
         foreach ($this->getQueryParams($request) as $key => $value) {
-            if ($key == 'page' || $key == 'per_page' || $key == 'paginate' || $key == 'fields') {
+            if (in_array($key, $ignoreKeys)) {
                 continue;
             }
             $this->parsedKeys[$key] = $value;
