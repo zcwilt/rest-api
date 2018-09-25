@@ -3,17 +3,16 @@
 namespace Zcwilt\Api\Parsers;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\RelationNotFoundException;
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\ParserParameterCountException;
 
 class ParserIncludes extends ParserAbstract
 {
     public function tokenizeParameters(string $parameters)
     {
-        if (trim($parameters) === '') {
-            throw new InvalidParserException("columns parser - invalid parameters");
+        $parameters = $this->handleSeparatedParameters($parameters);
+        if (count($parameters) === 0) {
+            throw new ParserParameterCountException("includes parser - missing parameters");
         }
-        $parameters = array_map('trim', explode(',', $parameters));
         foreach ($parameters as $field) {
             $this->tokenized[] = ['field' => $field];
         }

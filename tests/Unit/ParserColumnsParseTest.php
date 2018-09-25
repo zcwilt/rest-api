@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\ParserParameterCountException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Request;
@@ -15,26 +15,33 @@ class ParserColumnsParseTest extends TestCase
         $this->createTables();
         $this->seedTables();
     }
-    public function testColuimnsParserParseTestNoParams()
+    public function testColumnsParserParseTestNoParams()
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('columns');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('');
+    }
+    public function testColumnsParserParseTestMissingParams()
+    {
+        $parserFactory = new ParserFactory();
+        $parser = $parserFactory->getParser('columns');
+        $this->expectException(ParserParameterCountException::class);
+        $parser->parse('  , ');
     }
 
     public function testColumnsParserParseTestWithParams()
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('columns');
-        $parser->parse('id,name');
+        $parser->parse(',id,name');
         $tokenized = $parser->getTokenized();
         $this->assertTrue($tokenized[0]['field'] === 'id');
         $this->assertTrue($tokenized[1]['field'] === 'name');
     }
     public function testColumnsParserWithDummyData()
     {
-        Request::instance()->query->set('columns', 'id,name');
+        Request::instance()->query->set('columns', 'id, name ,');
         $result  = $this->getRequestResults();
         $this->assertTrue(count($result[0]) === 2);
         Request::instance()->query->set('columns', 'id,name,email');

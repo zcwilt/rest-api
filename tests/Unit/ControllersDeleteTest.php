@@ -50,7 +50,7 @@ class ControllersDeleteTest extends TestCase
         ]);
         $response = $controller->destroyByQuery($request);
         $response = json_decode($response->getContent());
-        $this->assertTrue($response->error->message === 'where parser - invalid parameters');
+        $this->assertTrue($response->error->message === 'where parser expects 3 parameters, found 2 parameters');
     }
 
     public function testControllerDeleteShowWithTrashed()

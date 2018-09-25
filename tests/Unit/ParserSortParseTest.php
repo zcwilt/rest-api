@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\ParserParameterCountException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Request;
@@ -21,7 +21,7 @@ class ParserSortParseTest extends TestCase
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('sort');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('');
     }
 

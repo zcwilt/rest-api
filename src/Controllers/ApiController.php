@@ -4,12 +4,10 @@ namespace Zcwilt\Api\Controllers;
 
 use Illuminate\Http\Request;
 use Zcwilt\Api\ApiQueryParser;
-use Zcwilt\Api\Exceptions\ApiException;
 use Zcwilt\Api\ParserFactory;
 use Zcwilt\Api\ModelMakerFactory;
 use Illuminate\Http\JsonResponse;
 use Validator;
-use Illuminate\Database\QueryException;
 
 class ApiController extends AbstractApiController
 {

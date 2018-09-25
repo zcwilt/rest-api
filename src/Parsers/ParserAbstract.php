@@ -30,4 +30,20 @@ abstract class ParserAbstract implements ParserInterface
     {
         return $this->tokenized;
     }
+
+    public function handleSeparatedParameters(string $parameters, string $separator = ','): array
+    {
+        $result = [];
+        if (trim($parameters) === '') {
+            return [];
+        }
+        $parameters = explode($separator, $parameters);
+
+        foreach ($parameters as $parameter) {
+            if (trim($parameter)) {
+                $result[] = $parameter;
+            }
+        }
+        return ($result);
+    }
 }

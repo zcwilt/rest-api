@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\UnknownParserException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
 
@@ -11,7 +11,7 @@ class GetParserTest extends TestCase
     public function testFailParserFactory()
     {
         $parserFactory = new ParserFactory();
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(UnknownParserException::class);
         $parserFactory->getParser('action');
     }
 

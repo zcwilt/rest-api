@@ -2,7 +2,8 @@
 
 namespace Tests\Unit;
 
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\ParserParameterCountException;
+use Zcwilt\Api\Exceptions\ParserInvalidParameterException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Request;
@@ -20,7 +21,7 @@ class ParserWhereParseTest extends TestCase
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('where');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('');
     }
     public function testWhereParserParseTestWithParams()
@@ -38,14 +39,14 @@ class ParserWhereParseTest extends TestCase
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('where');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('id:eq');
     }
     public function testWhereParserParseTestInvalidOperator()
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('where');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserInvalidParameterException::class);
         $parser->parse('id:foo:1');
     }
 

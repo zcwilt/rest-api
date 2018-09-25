@@ -5,7 +5,7 @@ use Zcwilt\Api\ApiQueryParser;
 use Zcwilt\Api\ParserFactory;
 use Illuminate\Support\Facades\Request;
 use Tests\TestCase;
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\UnknownParserException;
 
 class BuildParsersTest extends TestCase
 {
@@ -14,7 +14,7 @@ class BuildParsersTest extends TestCase
         $api = new ApiQueryParser(new ParserFactory());
         Request::instance()->query->set('bar', 'foo');
         $api->parseRequest(Request::instance());
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(UnknownParserException::class);
         $api->buildParsers();
     }
 

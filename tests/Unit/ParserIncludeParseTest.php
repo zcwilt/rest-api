@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Zcwilt\Api\ApiQueryParser;
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\ParserParameterCountException;
 use Illuminate\Database\Eloquent\RelationNotFoundException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
@@ -25,7 +25,7 @@ class ParserIncludeParseTest extends TestCase
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('includes');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('');
     }
 

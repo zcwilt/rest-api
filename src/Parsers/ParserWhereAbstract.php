@@ -2,7 +2,8 @@
 
 namespace Zcwilt\Api\Parsers;
 
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\ParserParameterCountException;
+use Zcwilt\Api\Exceptions\ParserInvalidParameterException;
 
 abstract class ParserWhereAbstract extends ParserAbstract
 {
@@ -22,15 +23,12 @@ abstract class ParserWhereAbstract extends ParserAbstract
 
     public function tokenizeParameters(string $parameters)
     {
-        if (trim($parameters) === '') {
-            throw new InvalidParserException("where parser - invalid parameters");
-        }
-        $parameters = array_map('trim', explode(':', $parameters));
+        $parameters = $this->handleSeparatedParameters($parameters, ':');
         if (count($parameters) !== 3) {
-            throw new InvalidParserException("where parser - invalid parameters");
+            throw ParserParameterCountException::withCounts('where', 3, count($parameters));
         }
         if (!array_key_exists($parameters[1], $this->operatorMap)) {
-            throw new InvalidParserException("where parser - invalid parameters");
+            throw new ParserInvalidParameterException("where parser - invalid parameters");
         }
         $this->tokenized = $parameters;
     }

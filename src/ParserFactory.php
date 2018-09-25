@@ -2,7 +2,7 @@
 
 namespace Zcwilt\Api;
 
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\UnknownParserException;
 use Zcwilt\Api\Parsers\ParserInterface;
 
 class ParserFactory
@@ -11,7 +11,7 @@ class ParserFactory
     {
         $classname = __NAMESPACE__ . '\\Parsers\\' . 'Parser' . ucfirst($method);
         if (!class_exists($classname)) {
-            throw new InvalidParserException("Can't find parser class " . $classname);
+            throw new UnknownParserException("Can't find parser class " . $classname);
         }
         $class = new $classname();
         return $class;

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\ParserParameterCountException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Request;
@@ -20,7 +20,7 @@ class ParserWhereBetweenParseTest extends TestCase
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('whereBetween');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('');
     }
     public function testWhereBetweenParserParseTestWithParams()
@@ -37,7 +37,7 @@ class ParserWhereBetweenParseTest extends TestCase
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('whereBetween');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('id');
     }
 

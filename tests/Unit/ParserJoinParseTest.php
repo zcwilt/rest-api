@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Zcwilt\Api\Exceptions\InvalidParserInvalidParameterException;
-use Zcwilt\Api\Exceptions\InvalidParserParameterCountException;
+use Zcwilt\Api\Exceptions\ParserInvalidParameterException;
+use Zcwilt\Api\Exceptions\ParserParameterCountException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Request;
@@ -21,14 +21,14 @@ class ParserJoinParseTest extends TestCase
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('join');
-        $this->expectException(InvalidParserParameterCountException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('');
     }
     public function testJoinParserParseTestInvalidNumParams()
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('join');
-        $this->expectException(InvalidParserParameterCountException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('inner:table:keyLeft');
     }
 
@@ -36,7 +36,7 @@ class ParserJoinParseTest extends TestCase
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('join');
-        $this->expectException(InvalidParserInvalidParameterException::class);
+        $this->expectException(ParserInvalidParameterException::class);
         $parser->parse('bad:table:keyLeft:keyRight');
     }
 

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Zcwilt\Api\Exceptions\InvalidParserException;
+use Zcwilt\Api\Exceptions\ParserParameterCountException;
 use Zcwilt\Api\ParserFactory;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Request;
@@ -20,7 +20,7 @@ class ParserWhereInParseTest extends TestCase
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('whereIn');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('');
     }
     public function testWhereInParserParseTestWithParams()
@@ -34,12 +34,20 @@ class ParserWhereInParseTest extends TestCase
         $this->assertTrue($tokenized['in'][0] === '1');
         $this->assertTrue($tokenized['in'][1] === '2');
     }
+
     public function testWhereInParserParseTestInvalidParams()
     {
         $parserFactory = new ParserFactory();
         $parser = $parserFactory->getParser('whereIn');
-        $this->expectException(InvalidParserException::class);
+        $this->expectException(ParserParameterCountException::class);
         $parser->parse('id');
+    }
+    public function testWhereInParserParseTestInvalidTokenized()
+    {
+        $parserFactory = new ParserFactory();
+        $parser = $parserFactory->getParser('whereIn');
+        $this->expectException(ParserParameterCountException::class);
+        $parser->parse('id:(,)');
     }
 
     public function testWhereInParserWithDummyData()
