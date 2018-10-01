@@ -41,7 +41,7 @@ abstract class ParserAbstract implements ParserInterface
 
         foreach ($parameters as $parameter) {
             if (trim($parameter)) {
-                $result[] = $parameter;
+                $result[] = trim($parameter);
             }
         }
         return ($result);
