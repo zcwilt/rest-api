@@ -5,7 +5,7 @@ API Controllers
 Routes
 ------
 
-zcwilt/rest-api uses resource controllers. To define your routes for each controller you want you will need to add the following to your api routes file.
+zcwilt/rest-api uses resource controllers. To define your routes for each controller you want, you will need to add the following to your api routes file.
 
 ::
 

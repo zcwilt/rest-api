@@ -1,9 +1,7 @@
 Query Parser Joins
 ==================
 
-.. warning:: This feature is a bit experimental at the moment.
-
-example
+Example
 
 ::
 

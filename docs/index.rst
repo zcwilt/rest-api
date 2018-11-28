@@ -1,7 +1,7 @@
 About
 =====
 
-.. warning:: This project is still under heavy development, and does not currently have a tagged release. However it should be ok for use in production code. See the :doc:`../introduction` for more details.
+.. warning:: This project is still in alpha phase, and does not currently have a 1.x release. However it should be ok for use in production code. See the :doc:`../todo` for more details.
 
 .. toctree::
     :maxdepth: 2
@@ -16,3 +16,4 @@ About
     contributing
     acknowledgements
     license
+    todo
