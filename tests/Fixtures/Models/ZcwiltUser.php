@@ -22,4 +22,9 @@ class ZcwiltUser extends Model
     {
         return $this->hasMany('Tests\Fixtures\Models\ZcwiltPost', 'user_id');
     }
+
+    public function scopeTeenager($query)
+    {
+        return $query->whereBetween('age', [13,19]);
+    }
 }

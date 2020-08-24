@@ -106,13 +106,22 @@ abstract class TestCase extends Orchestra
     private function createUserTableTestData()
     {
         $data = [];
-        $n = rand(16, 30);
+        $n = rand(10, 30);
         $softDeleted = 0;
         for ($i = 0; $i < $n; $i++) {
             $softDeleted = !$softDeleted;
             $name = 'name' . $i;
             $email = $name . '@gmail.com';
-            $age = rand(15, 76);
+            $age = rand(20, 76);
+            $deleted_at = ($softDeleted) ? now() : null;
+            $posts = $this->createUserPostsTestData($i);
+            $data[] = ['name' => $name, 'email' => $email, 'age' => $age, 'deleted_at' => $deleted_at, 'posts' => $posts];
+        }
+        for ($i = 0; $i < 8; $i++) {
+            $softDeleted = !$softDeleted;
+            $name = 'name-teenager' . $i;
+            $email = $name . '@gmail.com';
+            $age = $i+13;
             $deleted_at = ($softDeleted) ? now() : null;
             $posts = $this->createUserPostsTestData($i);
             $data[] = ['name' => $name, 'email' => $email, 'age' => $age, 'deleted_at' => $deleted_at, 'posts' => $posts];
