@@ -17,6 +17,7 @@ Currently the filter parser supports
 - orWhereNotBetween
 - withTrashed
 - onlyTrashed
+- scope
 
 Sorting allows for multiple sort targets for ascending and descending sorts.
 
@@ -39,6 +40,7 @@ columns are returned.
     queryparsercolumns
     queryparserincludes
     queryparserjoins
+    queryparserscopes
 
 
 URL Parameter Format
