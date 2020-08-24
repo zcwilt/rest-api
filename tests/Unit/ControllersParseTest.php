@@ -5,17 +5,10 @@ namespace Tests\Unit;
 use Tests\Fixtures\Controllers\Api\ZcwiltUserController;
 use Zcwilt\Api\ModelMakerFactory;
 use Illuminate\Support\Facades\Request;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 
-class ControllersParseTest extends TestCase
+class ControllersParseTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createTables();
-        $this->seedTables();
-    }
-
     public function testControllerIndexBadParser()
     {
         $request = Request::create('/index', 'GET', [

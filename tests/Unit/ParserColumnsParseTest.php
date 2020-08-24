@@ -4,17 +4,11 @@ namespace Tests\Unit;
 
 use Zcwilt\Api\Exceptions\ParserParameterCountException;
 use Zcwilt\Api\ParserFactory;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 use Illuminate\Support\Facades\Request;
 
-class ParserColumnsParseTest extends TestCase
+class ParserColumnsParseTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createTables();
-        $this->seedTables();
-    }
     public function testColumnsParserParseTestNoParams()
     {
         $parserFactory = new ParserFactory();

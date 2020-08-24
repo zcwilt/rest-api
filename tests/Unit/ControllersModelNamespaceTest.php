@@ -7,18 +7,11 @@ use Tests\Fixtures\Controllers\Api\ZcwiltDummy1Controller;
 use Tests\Fixtures\Controllers\Api\ZcwiltDummy2Controller;
 use Zcwilt\Api\ModelMakerFactory;
 use Illuminate\Support\Facades\Request;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 use Zcwilt\Api\Exceptions\InvalidModelException;
 
-class ControllersModelNamespaceTest extends TestCase
+class ControllersModelNamespaceTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createTables();
-        $this->seedTables();
-    }
-
     public function testControllerAppNamespace()
     {
         $request = Request::create('/index', 'GET', [

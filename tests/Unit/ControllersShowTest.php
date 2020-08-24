@@ -4,17 +4,10 @@ namespace Tests\Unit;
 
 use Tests\Fixtures\Controllers\Api\ZcwiltUserController;
 use Zcwilt\Api\ModelMakerFactory;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 
-class ControllersShowTest extends TestCase
+class ControllersShowTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createTables();
-        $this->seedTables();
-    }
-
     public function testControllerShow()
     {
         $controller = new ZcwiltUserController(new ModelMakerFactory());

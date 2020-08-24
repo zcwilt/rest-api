@@ -6,17 +6,10 @@ use Tests\Fixtures\Models\ZcwiltUser;
 use Zcwilt\Api\ApiQueryParser;
 use Zcwilt\Api\ParserFactory;
 use Illuminate\Support\Facades\Request;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 
-class BuildQueryTest extends TestCase
+class BuildQueryTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createTables();
-        $this->seedTables();
-    }
-
     public function testBasic()
     {
         $testResult = ZcWiltUser::all();

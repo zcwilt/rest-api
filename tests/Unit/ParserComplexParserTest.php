@@ -2,19 +2,12 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 use Illuminate\Support\Facades\Request;
 use Tests\Fixtures\Models\ZcwiltUser;
 
-class ParserComplexParserTest extends TestCase
+class ParserComplexParserTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createTables();
-        $this->seedTables();
-    }
-
     public function testComplexWithDummyData()
     {
         $testResult = ZcWiltUser::orWhere('id', '=', 1)->orWhere('id', '=', 2)->get()->toArray();

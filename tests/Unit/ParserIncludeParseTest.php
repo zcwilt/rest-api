@@ -6,21 +6,14 @@ use Zcwilt\Api\ApiQueryParser;
 use Zcwilt\Api\Exceptions\ParserParameterCountException;
 use Illuminate\Database\Eloquent\RelationNotFoundException;
 use Zcwilt\Api\ParserFactory;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 use Illuminate\Support\Facades\Request;
 use Tests\Fixtures\Controllers\Api\ZcwiltUserController;
 use Zcwilt\Api\ModelMakerFactory;
 use Tests\Fixtures\Models\ZcwiltUser;
 
-class ParserIncludeParseTest extends TestCase
+class ParserIncludeParseTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createTables();
-        $this->seedTables();
-    }
-
     public function testIncludesParserParseTestNoParams()
     {
         $parserFactory = new ParserFactory();

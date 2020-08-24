@@ -4,18 +4,12 @@ namespace Tests\Unit;
 
 use Zcwilt\Api\Exceptions\ParserParameterCountException;
 use Zcwilt\Api\ParserFactory;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 use Illuminate\Support\Facades\Request;
 use Tests\Fixtures\Models\ZcwiltUser;
 
-class ParserWhereInParseTest extends TestCase
+class ParserWhereInParseTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createTables();
-        $this->seedTables();
-    }
     public function testWhereInParserParseTestNoParams()
     {
         $parserFactory = new ParserFactory();

@@ -6,19 +6,12 @@ use Tests\Fixtures\Controllers\Api\ZcwiltUserController;
 use Tests\Fixtures\Controllers\Api\ZcwiltDummyController;
 use Zcwilt\Api\ModelMakerFactory;
 use Illuminate\Support\Facades\Request;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 use Tests\Fixtures\Models\ZcwiltUser;
 use Zcwilt\Api\Exceptions\ApiException;
 
-class ControllersDeleteTest extends TestCase
+class ControllersDeleteTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createTables();
-        $this->seedTables();
-    }
-
     public function testControllerSimpleDelete()
     {
         $controller = new ZcwiltUserController(new ModelMakerFactory());
