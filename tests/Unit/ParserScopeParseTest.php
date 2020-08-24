@@ -34,4 +34,12 @@ class ParserScopeParseTest extends DatabaseTestCase
         $this->assertEquals($count, 7);
     }
 
+    public function testScopeParserParseWithOrderBy()
+    {
+        Request::instance()->query->set('scope', 'teenager')->set('sort', '-age');
+        $result = $this->getRequestResults();
+        $count = collect($result)->whereBetween('age', [13,19])->count();
+        $this->assertEquals($count, 7);
+    }
+
 }
