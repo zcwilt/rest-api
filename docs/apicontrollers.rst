@@ -68,6 +68,32 @@ The controller definition is fairly simple
         protected $modelName = 'ModelName';
 
 
+Validation
+----------
+
+The base ApiController class that your controller extends contains calls
+to Laravels Validation system.
+
+To use validation on your api request you must create a public ``rules`` method on
+the model your controller accesses.
+
+e.g.
+
+.. code-block:: php
+
+    public function rules($id = 0)
+    {
+        return [
+            'email' => 'required|unique:zcwilt_users'.($id ? ",email,$id" : ''),
+            'name' => 'required'
+        ];
+    }
+
+
+.. note:: For update methods, the primary key value is passed as the ``$id``
+    parameter.
+
+
 Api Endpoints
 -------------
 
