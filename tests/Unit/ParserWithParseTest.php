@@ -12,12 +12,12 @@ use Tests\Fixtures\Controllers\Api\ZcwiltUserController;
 use Zcwilt\Api\ModelMakerFactory;
 use Tests\Fixtures\Models\ZcwiltUser;
 
-class ParserIncludeParseTest extends DatabaseTestCase
+class ParserWithParseTest extends DatabaseTestCase
 {
     public function testIncludesParserParseTestNoParams()
     {
         $parserFactory = new ParserFactory();
-        $parser = $parserFactory->getParser('includes');
+        $parser = $parserFactory->getParser('with');
         $this->expectException(ParserParameterCountException::class);
         $parser->parse('');
     }
@@ -25,7 +25,7 @@ class ParserIncludeParseTest extends DatabaseTestCase
     public function testIncludesParserParseTestWithParams()
     {
         $api = new ApiQueryParser(new ParserFactory());
-        Request::instance()->query->set('includes', 'foo,bar');
+        Request::instance()->query->set('with', 'foo,bar');
         $api->parseRequest(Request::instance());
         $api->buildParsers();
         $tokenized = $api->getQueryParts()[0]->getTokenized()[0];
@@ -37,7 +37,7 @@ class ParserIncludeParseTest extends DatabaseTestCase
     public function testIncludesParserWithDummyData()
     {
         $testResult = ZcWiltUser::with('posts')->get()->toArray();
-        Request::instance()->query->set('includes', 'posts');
+        Request::instance()->query->set('with', 'posts');
         $result  = $this->getRequestResults();
         $this->assertTrue(count($result) === count($testResult));
         $this->assertTrue(count($result[0]['posts']) === count($testResult[0]['posts']));
@@ -45,7 +45,7 @@ class ParserIncludeParseTest extends DatabaseTestCase
 
     public function testIncludesParserWithDummyDataInvalidWith()
     {
-        Request::instance()->query->set('includes', 'foos');
+        Request::instance()->query->set('with', 'foos');
         $this->expectException(RelationNotFoundException::class);
         $this->getRequestResults();
     }
@@ -54,7 +54,7 @@ class ParserIncludeParseTest extends DatabaseTestCase
     {
         $testResult = ZcWiltUser::with('posts')->where('id', '=', 2)->get()->toArray();
         $request = Request::create('/index', 'GET', [
-            'where' => 'id:eq:2', 'includes' => 'posts'
+            'where' => 'id:eq:2', 'with' => 'posts'
         ]);
         $controller = new ZcwiltUserController(new ModelMakerFactory());
         $response = $controller->index($request);
@@ -66,7 +66,7 @@ class ParserIncludeParseTest extends DatabaseTestCase
     public function testControllerIndexWithIncludesParserFail()
     {
         $request = Request::create('/index', 'GET', [
-            'where' => 'id:eq:1', 'includes' => 'foo'
+            'where' => 'id:eq:1', 'with' => 'foo'
         ]);
         $controller = new ZcwiltUserController(new ModelMakerFactory());
         $response = $controller->index($request);
