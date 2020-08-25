@@ -38,7 +38,7 @@ columns are returned.
     queryparsersoftdeletes
     queryparsersorting
     queryparsercolumns
-    queryparserincludes
+    queryparserwith
     queryparserjoins
     queryparserscopes
 
