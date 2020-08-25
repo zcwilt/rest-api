@@ -7,5 +7,5 @@ example
 
     {api-uri}?columns[]=id,name
 
-will restict the returned columns to just id and name.
+will restrict the returned columns to just id and name.
 

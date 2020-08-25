@@ -94,6 +94,12 @@ e.g.
     parameter.
 
 
+.. warning:: The controller uses ``$request->all()`` to pass request fields
+    to the model update/create methods. This could allow malicious users to update
+    database fields that you did not want. You **must** therefore be very explicit
+    in your models as to which fields can be used in this way. e.g. using the ``$fillable`` property.
+
+
 Api Endpoints
 -------------
 
